@@ -5,7 +5,7 @@ jobs:
     runs-on: ubuntu-20.04
     strategy:
       matrix:
-        chrome_url: ["https://www.googleapis.com/download/storage/v1/b/chromium-browser-snapshots/o/Linux_x64%2F883341%2Fchrome-linux.zip?generation=1621214761319361&alt=media"] #, "https://www.googleapis.com/download/storage/v1/b/chromium-browser-snapshots/o/Linux_x64%2F894125%2Fchrome-linux.zip?generation=1624240675677350&alt=media"]
+        chrome_url: ["https://www.googleapis.com/download/storage/v1/b/chromium-browser-snapshots/o/Linux_x64%2F883341%2Fchrome-linux.zip?generation=1621214761319361&alt=media" , "https://www.googleapis.com/download/storage/v1/b/chromium-browser-snapshots/o/Linux_x64%2F894125%2Fchrome-linux.zip?generation=1624240675677350&alt=media"]
     steps:
     - name: checkout
       uses: actions/checkout@v2
@@ -16,6 +16,9 @@ jobs:
     - name: Download chrome
       run: curl "${{ matrix.chrome_url }}" --output chrome.zip && unzip chrome.zip
 
+    - name: Print chrome version
+      run: chrome-linux/chrome --version
+    
     - name: Run tests
       run: cd project && npm install && npm test
       env:
