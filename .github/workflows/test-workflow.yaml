@@ -11,7 +11,12 @@ jobs:
       uses: actions/checkout@v2
     
     - name: Install apt dependencies
-      run: sudo apt update && sudo apt install unzip #libatk-bridge2.0-0 libatk1.0-0 libnss3 libcups2 libxkbcommon0 libxcomposite1 libxdamage1 libxfixes3 libxrandr2 libxkbcommon0 libgbm1 libxshmfence1 libx11-xcb1 libpango-1.0-0 libcairo2 nodejs npm 
+      run: sudo apt update && sudo apt install unzip libatk-bridge2.0-0 libatk1.0-0 libnss3 libcups2 libxkbcommon0 libxcomposite1 libxdamage1 libxfixes3 libxrandr2 libxkbcommon0 libgbm1 libxshmfence1 libx11-xcb1 libpango-1.0-0 libcairo2 nodejs npm
 
     - name: Download chrome
-      run: curl "${{ matrix.chrome_url }}" --output chrome.zip && unzip chrome.zip && ls -la .
+      run: curl "${{ matrix.chrome_url }}" --output chrome.zip && unzip chrome.zip
+
+    - name: Run tests
+      run: cd project && npm install && npm test
+      env:
+        CHROME_BIN: ../chrome-linux/chrome
