@@ -5,13 +5,13 @@ jobs:
     runs-on: ubuntu-20.04
     strategy:
       matrix:
-        chrome_url: ["https://www.googleapis.com/download/storage/v1/b/chromium-browser-snapshots/o/Linux_x64%2F883341%2Fchrome-linux.zip?generation=1621214761319361&alt=media", "https://www.googleapis.com/download/storage/v1/b/chromium-browser-snapshots/o/Linux_x64%2F894125%2Fchrome-linux.zip?generation=1624240675677350&alt=media"]
+        chrome_url: ["https://www.googleapis.com/download/storage/v1/b/chromium-browser-snapshots/o/Linux_x64%2F883341%2Fchrome-linux.zip?generation=1621214761319361&alt=media"] #, "https://www.googleapis.com/download/storage/v1/b/chromium-browser-snapshots/o/Linux_x64%2F894125%2Fchrome-linux.zip?generation=1624240675677350&alt=media"]
     steps:
     - name: checkout
       uses: actions/checkout@v2
     
-    - name: Install ap dependencies
-      run: sudo apt update && sudo apt install unzip libatk-bridge2.0-0 libatk1.0-0 libnss3 libcups2 libxkbcommon0 libxcomposite1 libxdamage1 libxfixes3 libxrandr2 libxkbcommon0 libgbm1 libxshmfence1 libx11-xcb1 libpango-1.0-0 libcairo2 nodejs npm 
+    - name: Install apt dependencies
+      run: sudo apt update && sudo apt install unzip #libatk-bridge2.0-0 libatk1.0-0 libnss3 libcups2 libxkbcommon0 libxcomposite1 libxdamage1 libxfixes3 libxrandr2 libxkbcommon0 libgbm1 libxshmfence1 libx11-xcb1 libpango-1.0-0 libcairo2 nodejs npm 
 
     - name: Download chrome
       run: curl ${{ matrix.chrome_url }} --output chrome.zip && unzip chrome.zip && ls -la .
